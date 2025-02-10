@@ -13,7 +13,7 @@ import axios from "axios";
 
 const apiRequest = axios.create({
   baseURL: process.env.NODE_ENV === "production" 
-    ? "https://task-manager-fj39.onrender.com/api"
+    ? "https://real-estate-zpov.onrender.com/api"
     : "http://localhost:8000/api",
   withCredentials: true,
 });
