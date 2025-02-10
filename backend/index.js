@@ -14,31 +14,12 @@ app.use(cors({ origin:process.env.CORS_ORIGIN, credentials: true }));
 
 
 
-
-// const port = process.env.PORT || 8000;
-// const app = express();
-
-// Allowed origins (for local dev & production)
-const allowedOrigins = [
-  "http://localhost:5173", // Local frontend
-  process.env.CORS_ORIGIN,   // Production frontend from .env
-];
-
-console.log("✅ Allowed Origins:", allowedOrigins);
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.error("❌ CORS Error: Blocked Origin -", origin);
-        callback(new Error("CORS policy violation"), false);
-      }
-    },
-    credentials: true,
-  })
-);
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Auth-Token, Origin, Authorization");
+  next();
+});
 
 
 
